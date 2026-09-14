@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width,
+        initial-scale=1.0,
+        maximum-scale=1.0,
+        user-scalable=no"
+    >
+
+    <title>English Words</title>
+
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================
+     WELCOME
+===================================== -->
+
+<div
+    id="welcome"
+    class="welcome"
+>
+
+    <div class="welcome-card">
+
+        <div class="flower">
+            🌷
+        </div>
+
+        <h1>
+            Здравствуйте!
+        </h1>
+
+        <p>
+            Наталья, прекрасно выглядите ✨
+        </p>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================
+     HEADER
+===================================== -->
+
+<header>
+
+    <div class="logo">
+        📚 English Words
+    </div>
+
+    <div class="stats">
+
+        ⭐
+        <span id="score">
+            0
+        </span>
+
+        🔥
+        <span id="streak">
+            0
+        </span>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================
+     MAIN
+===================================== -->
+
+<main>
+
+
+<!-- =====================================
+     HOME
+===================================== -->
+
+<section
+    id="home"
+    class="page active"
+>
+
+    <div class="hero">
+
+        <div class="badge">
+            CEFR A1 — C2
+        </div>
+
+        <h1>
+            Английский
+            <span>
+                без скучной зубрёжки
+            </span>
+        </h1>
+
+        <p>
+            Выбирайте уровень, изучайте полезную
+            лексику, проходите тесты и
+            отслеживайте прогресс.
+        </p>
+
+    </div>
+
+
+    <h2>
+        Выберите уровень
+    </h2>
+
+
+    <div class="levels">
+
+
+        <button
+            onclick="openLevel('A1')"
+        >
+
+            <strong>A1</strong>
+
+            <span>
+                Beginner
+            </span>
+
+            <small>
+                Начальный
+            </small>
+
+        </button>
+
+
+
+        <button
+            onclick="openLevel('A2')"
+        >
+
+            <strong>A2</strong>
+
+            <span>
+                Elementary
+            </span>
+
+            <small>
+                Элементарный
+            </small>
+
+        </button>
+
+
+
+        <button
+            onclick="openLevel('B1')"
+        >
+
+            <strong>B1</strong>
+
+            <span>
+                Intermediate
+            </span>
+
+            <small>
+                Средний
+            </small>
+
+        </button>
+
+
+
+        <button
+            onclick="openLevel('B2')"
+        >
+
+            <strong>B2</strong>
+
+            <span>
+                Upper-Intermediate
+            </span>
+
+            <small>
+                Выше среднего
+            </small>
+
+        </button>
+
+
+
+        <button
+            onclick="openLevel('C1')"
+        >
+
+            <strong>C1</strong>
+
+            <span>
+                Advanced
+            </span>
+
+            <small>
+                Продвинутый
+            </small>
+
+        </button>
+
+
+
+        <button
+            onclick="openLevel('C2')"
+        >
+
+            <strong>C2</strong>
+
+            <span>
+                Proficiency
+            </span>
+
+            <small>
+                Высший
+            </small>
+
+        </button>
+
+
+    </div>
+
+
+    <div class="quick">
+
+        <button
+            onclick="randomQuiz()"
+        >
+            🎯 Быстрый тест
+        </button>
+
+        <button
+            onclick="showProgress()"
+        >
+            📊 Прогресс
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================
+     LIBRARY
+===================================== -->
+
+<section
+    id="library"
+    class="page"
+>
+
+    <button
+        class="back"
+        onclick="home()"
+    >
+        ← Уровни
+    </button>
+
+
+    <div class="library-header">
+
+        <div>
+
+            <div
+                class="badge"
+                id="levelBadge"
+            >
+                A1
+            </div>
+
+            <h2
+                id="levelTitle"
+            >
+                Beginner
+            </h2>
+
+        </div>
+
+        <span
+            id="wordCount"
+        >
+        </span>
+
+    </div>
+
+
+    <input
+        id="search"
+        class="search"
+        placeholder="🔎 Поиск слова..."
+        oninput="searchWords()"
+    >
+
+
+    <div
+        id="wordList"
+        class="word-list"
+    >
+    </div>
+
+
+    <div class="library-buttons">
+
+        <button
+            onclick="startCards()"
+        >
+            🃏 Карточки
+        </button>
+
+        <button
+            onclick="startQuiz()"
+        >
+            🎯 Тест
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================
+     FLASHCARDS
+===================================== -->
+
+<section
+    id="cards"
+    class="page"
+>
+
+    <button
+        class="back"
+        onclick="library()"
+    >
+        ← Библиотека
+    </button>
+
+
+    <div class="card-progress">
+
+        <span id="cardProgress">
+            1 / 20
+        </span>
+
+    </div>
+
+
+    <div class="flashcard">
+
+        <div
+            class="card-level"
+            id="cardLevel"
+        >
+            A1
+        </div>
+
+
+        <h1
+            id="cardWord"
+        >
+            —
+        </h1>
+
+
+        <div
+            id="translation"
+            class="translation hidden"
+        >
+        </div>
+
+
+        <div
+            id="example"
+            class="example hidden"
+        >
+        </div>
+
+
+        <div class="card-actions">
+
+            <button
+                onclick="speak()"
+            >
+                🔊
+            </button>
+
+
+            <button
+                onclick="showTranslation()"
+            >
+                Показать перевод
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="answer-buttons">
+
+        <button
+            onclick="repeatWord()"
+        >
+            ↻ Повторить
+        </button>
+
+
+        <button
+            class="know"
+            onclick="knowWord()"
+        >
+            ✓ Знаю
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================
+     QUIZ
+===================================== -->
+
+<section
+    id="quiz"
+    class="page"
+>
+
+    <button
+        class="back"
+        onclick="library()"
+    >
+        ← Библиотека
+    </button>
+
+
+    <div class="quiz-card">
+
+        <div class="badge">
+            ТЕСТ
+        </div>
+
+
+        <h1
+            id="quizWord"
+        >
+            —
+        </h1>
+
+
+        <p
+            id="quizProgress"
+        >
+        </p>
+
+
+        <div
+            id="quizAnswers"
+            class="quiz-answers"
+        >
+        </div>
+
+
+        <div
+            id="quizResult"
+            class="quiz-result"
+        >
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================
+     PROGRESS
+===================================== -->
+
+<section
+    id="progress"
+    class="page"
+>
+
+    <button
+        class="back"
+        onclick="home()"
+    >
+        ← Главная
+    </button>
+
+
+    <h2>
+        Твой прогресс 📊
+    </h2>
+
+
+    <div class="statistics">
+
+
+        <div>
+
+            <strong
+                id="statScore"
+            >
+                0
+            </strong>
+
+            <span>
+                Очков
+            </span>
+
+        </div>
+
+
+        <div>
+
+            <strong
+                id="statWords"
+            >
+                0
+            </strong>
+
+            <span>
+                Выучено
+            </span>
+
+        </div>
+
+
+        <div>
+
+            <strong
+                id="statStreak"
+            >
+                0
+            </strong>
+
+            <span>
+                Серия
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+<script src="words.js"></script>
+<script src="script.js"></script>
+
+</body>
+
+</html>
